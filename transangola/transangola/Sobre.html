@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre - TransAngola</title>
+    <style>
+        :root {
+            --primary-color: #1a73e8;
+            --secondary-color: #34a853;
+            --dark-color: #202124;
+            --light-color: #ffffff;
+            --gray-color: #5f6368;
+            --background-color: #f8f9fa;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+            background-color: var(--background-color);
+            padding-top: 80px;
+        }
+
+        /* Cabeçalho */
+        header {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            padding: 1rem 5%;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo h1 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-color);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--primary-color);
+        }
+
+        .cta-button {
+            background: var(--primary-color);
+            color: var(--light-color) !important;
+            padding: 0.8rem 1.5rem;
+            border-radius: 4px;
+            transition: background 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .cta-button:hover {
+            background: #1557b0;
+        }
+
+        /* Conteúdo Sobre */
+        .about-section {
+            padding: 5rem 10%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .about-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .about-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .about-header p {
+            font-size: 1.1rem;
+            color: var(--gray-color);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-image {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--dark-color);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: var(--gray-color);
+            line-height: 1.8;
+        }
+
+        .mission-vision {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .mission-card, .vision-card {
+            background: var(--light-color);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .mission-card h4, .vision-card h4 {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .mission-card h4 i, .vision-card h4 i {
+            font-size: 1.8rem;
+        }
+
+        /* Rodapé */
+        footer {
+            background: var(--dark-color);
+            color: var(--light-color);
+            padding: 3rem 5%;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--light-color);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            color: var(--light-color);
+            font-size: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .mission-vision {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .about-header h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding-top: 70px;
+            }
+            
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                width: 100%;
+                margin-top: 1rem;
+                display: none;
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .about-section {
+                padding: 3rem 1.5rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <h1>TransAngola</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="Untitled-1.html">Início</a></li>
+                <li><a href="Sobre.html" class="active">Sobre</a></li>
+                <li><a href="Viagens.html">Viagens</a></li>
+                <li><a href="Contato.html">Contato</a></li>
+                <li><a href="comprar.html" class="cta-button">Comprar Bilhete</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="about-section">
+        <div class="about-header">
+            <h2>Sobre a TransAngola</h2>
+            <p>Conectando Angola através de viagens seguras, confortáveis e acessíveis desde 2025.</p>
+        </div>
+
+        <div class="about-content">
+            <div class="about-image">
+                <img src="Img/viajar de ônibus.jpg" alt="Ônibus TransAngola">
+            </div>
+            <div class="about-text">
+                <h3>Nossa História</h3>
+                <p>A TransAngola nasceu em 2010 com o objetivo de revolucionar o transporte rodoviário em Angola. Começamos com apenas duas rotas e hoje conectamos todas as 18 províncias do país.</p>
+                <p>Nossa frota moderna e motoristas altamente qualificados garantem que você chegue ao seu destino com segurança e conforto, seja a trabalho ou lazer.</p>
+                <p>Estamos comprometidos em oferecer serviços de qualidade que superem as expectativas dos nossos passageiros, contribuindo para o desenvolvimento do transporte em Angola.</p>
+            </div>
+        </div>
+
+        <div class="mission-vision">
+            <div class="mission-card">
+                <h4><i class="fas fa-bullseye"></i> Missão</h4>
+                <p>Proporcionar transporte rodoviário de excelência, conectando pessoas e negócios através de serviços seguros, confortáveis e acessíveis, contribuindo para o desenvolvimento socioeconômico de Angola.</p>
+            </div>
+            <div class="vision-card">
+                <h4><i class="fas fa-eye"></i> Visão</h4>
+                <p>Ser reconhecida como a melhor empresa de transporte rodoviário de Angola, referência em qualidade, inovação e satisfação dos clientes, expandindo nossas rotas para toda a região da África Austral.</p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>TransAngola</h3>
+                <p>Sua jornada começa conosco.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contato</h3>
+                <p>Email: info@transangola.ao</p>
+                <p>Telefone: +244 123 456 789</p>
+            </div>
+            <div class="footer-section">
+                <h3>Redes Sociais</h3>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 TransAngola. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+</body>
+</html>

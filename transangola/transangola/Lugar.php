@@ -1,0 +1,173 @@
+<?php
+require_once 'conexao.php';
+
+
+$stmt = $pdo->prepare("SELECT numero_poltrona FROM Poltronas WHERE status IN ('reservado', 'comprado')");
+$stmt->execute();
+$ocupadas = $stmt->fetchAll(PDO::FETCH_COLUMN, 0);
+
+
+$ocupadasJS = json_encode(array_map('intval', $ocupadas));
+
+// Para debug
+// echo "<pre>Poltronas ocupadas: "; print_r($ocupadas); echo "</pre>";
+?>
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seleção de Poltronas - TransAngola</title>
+    <link rel="stylesheet" href="css/Lugar.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <h1>TransAngola</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="Untitled-1.html">Início</a></li>
+                <li><a href="Sobre.html">Sobre</a></li>
+                <li><a href="Contato.html">Contato</a></li>
+                <li><a href="Viagens.html" class="cta-button active">Comprar Bilhete</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>Selecione sua Poltrona</h1>
+        <div class="bus">
+            <div class="row">
+                <div class="seat">01</div>
+                <div class="seat">02</div>
+                <div class="corridor"></div>
+                <div class="seat">03</div>
+                <div class="seat">04</div>
+            </div>
+            <div class="row">
+                <div class="seat">05</div>
+                <div class="seat">06</div>
+                <div class="corridor"></div>
+                <div class="seat">07</div>
+                <div class="seat">08</div>
+            </div>
+            <div class="row">
+                <div class="seat">09</div>
+                <div class="seat">10</div>
+                <div class="corridor"></div>
+                <div class="seat">11</div>
+                <div class="seat">12</div>
+            </div>
+            <div class="row">
+                <div class="seat">13</div>
+                <div class="seat">14</div>
+                <div class="corridor"></div>
+                <div class="seat">15</div>
+                <div class="seat">16</div>
+            </div>
+            <div class="row">
+                <div class="seat">17</div>
+                <div class="seat">18</div>
+                <div class="corridor"></div>
+                <div class="seat">19</div>
+                <div class="seat">20</div>
+            </div>
+            <div class="row">
+                <div class="seat">21</div>
+                <div class="seat">22</div>
+                <div class="corridor"></div>
+                <div class="seat">23</div>
+                <div class="seat">24</div>
+            </div>
+            <div class="row">
+                <div class="seat">25</div>
+                <div class="seat">26</div>
+                <div class="corridor"></div>
+                <div class="seat">27</div>
+                <div class="seat">28</div>
+            </div>
+        </div>
+        
+        <div class="navigation-buttons">
+            <button class="nav-button" id="btnAnterior">Anterior</button>
+            <button class="nav-button" id="btnProximo">Próximo</button>
+        </div>
+        <div class="message" id="message"></div>
+    </div>
+    <script>
+
+        let selectedSeats = [];
+        
+     
+        const ocupadas = <?php echo $ocupadasJS; ?>;
+        
+        console.log("Poltronas ocupadas:", ocupadas); 
+        
+
+        function seatClickHandler() {
+            this.classList.toggle('selected');
+            
+            const seatNumber = this.textContent.trim();
+            
+            if (this.classList.contains('selected')) {
+                if (!selectedSeats.includes(seatNumber)) {
+                    selectedSeats.push(seatNumber);
+                }
+            } else {
+                selectedSeats = selectedSeats.filter(num => num !== seatNumber);
+            }
+            
+            updateProximoButton();
+        }
+        
+     
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.seat').forEach(seat => {
+                const seatNumber = parseInt(seat.textContent.trim());
+             
+                if (ocupadas.includes(seatNumber)) {
+                    seat.classList.add('occupied');
+             
+                } else {
+                
+                    seat.addEventListener('click', seatClickHandler);
+                }
+            });
+            
+
+            updateProximoButton();
+        });
+
+     
+        function updateProximoButton() {
+            const selectedSeatsElements = document.querySelectorAll('.seat.selected');
+            
+            if (selectedSeatsElements.length > 0) {
+                document.getElementById('message').textContent = '';
+            }
+        }
+
+      
+        document.getElementById('btnAnterior').addEventListener('click', () => {
+            window.location.href = 'viagen.html';
+        });
+
+
+        document.getElementById('btnProximo').addEventListener('click', () => {
+            const selectedSeatsElements = document.querySelectorAll('.seat.selected');
+            const message = document.getElementById('message');
+            
+            if (selectedSeatsElements.length === 0) {
+                message.textContent = 'Por favor, selecione pelo menos uma poltrona antes de continuar.';
+            } else {
+              
+                localStorage.setItem('selectedSeats', JSON.stringify(selectedSeats));
+                
+             
+                window.location.href = 'Informações pessoais.php';
+            }
+        });
+    </script>
+</body>
+</html>
